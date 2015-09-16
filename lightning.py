@@ -13,7 +13,7 @@ GPIO.setmode(GPIO.BCM)
 # Rev. 1 Raspberry Pis should leave bus set at 0, while rev. 2 Pis should set
 # bus equal to 1. The address should be changed to match the address of the
 # sensor. (Common implementations are in README.md)
-sensor = RPi_AS3935(address=0x03, bus=1)
+#sensor = RPi_AS3935(address=0x03, bus=1)
 
 sensor.set_indoors(True)
 sensor.set_noise_floor(0)
@@ -50,14 +50,14 @@ while True:
 
 
 
-class RPi_AS3935:
+class sensor:
     """A basic class used for interacting with the AS3935 lightning
     sensor from a Raspberry Pi over I2C"""
 
-    def __init__(self, address, bus=0):
-        self.address = address
+    def __init__(self):
+        self.address = 0x03
         import smbus
-        self.i2cbus = smbus.SMBus(bus)
+        self.i2cbus = smbus.SMBus(1)
 
     def calibrate(self, tun_cap=None):
         """Calibrate the lightning sensor - this takes up to half a second
